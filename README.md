@@ -82,6 +82,6 @@ The project is actively being developed, and some features may be experimental o
 
 📄 License
 
-This project is released under the MIT License.
+This project is released under the [MIT License](https://github.com/slipptech-tech/BitLauncher/blob/main/LICENSE)
 
 ⭐ If you like the project, consider giving the repository a star!
