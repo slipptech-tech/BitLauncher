@@ -1,4 +1,5 @@
-# BitLauncher
+<img width="594" height="98" alt="image" src="https://github.com/user-attachments/assets/68daffff-e19d-4792-932f-ca0283923a0c" />
+
 Minecraft Fabric Python Open-Source Launcher
 
 Minecraft Fabric Python Open-Source Launcher is a lightweight, modern, and fully open-source launcher for Minecraft Java Edition, built with Python and designed with Fabric in mind.
