@@ -85,3 +85,10 @@ The project is actively being developed, and some features may be experimental o
 This project is released under the [MIT License](https://github.com/slipptech-tech/BitLauncher/blob/main/LICENSE)
 
 ⭐ If you like the project, consider giving the repository a star!
+
+
+<p align="center">
+  <a href="https://github.com/slipptech-tech/BitLauncher/wiki">
+    <img width="788" height="78" alt="BitLauncher-Wiki" src="https://github.com/user-attachments/assets/0ef7f8f6-5ef6-4f25-91f9-bce6abde715a" />
+  </a>
+</p>
