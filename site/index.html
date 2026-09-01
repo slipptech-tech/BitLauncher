@@ -1,1594 +1,1930 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="BitLauncher — a modern, lightweight and open-source Minecraft Fabric launcher.">
-
-    <meta name="theme-color" content="#080a0f">
-
-    <title>BitLauncher — Minecraft Fabric Launcher</title>
-
-    <style>
-        /* =========================================================
-           BITLAUNCHER WEBSITE
-           Everything is contained in this single HTML file.
-           ========================================================= */
-
-        :root {
-            --background: #07090d;
-            --background-secondary: #0b0f16;
-            --card: rgba(18, 23, 33, 0.72);
-            --card-hover: rgba(25, 31, 44, 0.85);
-
-            --text: #f5f7fb;
-            --text-secondary: #9aa5b5;
-            --text-dark: #687386;
-
-            --purple: #7c5cff;
-            --purple-light: #a995ff;
-            --green: #35d6a4;
-
-            --border: rgba(255, 255, 255, 0.09);
-            --border-hover: rgba(124, 92, 255, 0.45);
-
-            --shadow: rgba(0, 0, 0, 0.45);
-            --glow: rgba(124, 92, 255, 0.35);
-
-            --radius: 20px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+      content="BitLauncher — a modern open-source Minecraft Fabric launcher.">
+
+<meta name="theme-color" content="#07070a">
+
+<title>BitLauncher — Minecraft Launcher</title>
+
+<style>
+/* =========================================================
+   BITLAUNCHER
+   Modern dark landing page
+   ========================================================= */
+
+:root {
+    --bg: #06070a;
+    --bg2: #0a0c11;
+    --panel: #10131a;
+    --panel2: #141821;
+
+    --white: #f5f7fb;
+    --text: #a7afbd;
+    --muted: #687180;
+
+    --purple: #805cff;
+    --purple2: #a78bff;
+    --green: #38dfaa;
+
+    --border: rgba(255,255,255,.08);
+    --border-hover: rgba(128,92,255,.45);
+
+    --shadow: 0 30px 80px rgba(0,0,0,.35);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
 
-        body {
-            min-height: 100vh;
+body {
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(128,92,255,.16),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 100% 50%,
+            rgba(56,223,170,.055),
+            transparent 28%
+        ),
+        var(--bg);
 
-            font-family:
-                Inter,
-                ui-sans-serif,
-                system-ui,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                sans-serif;
+    color: var(--white);
 
-            color: var(--text);
-            background:
-                radial-gradient(
-                    circle at 15% 10%,
-                    rgba(124, 92, 255, 0.14),
-                    transparent 30%
-                ),
-                radial-gradient(
-                    circle at 85% 35%,
-                    rgba(53, 214, 164, 0.08),
-                    transparent 25%
-                ),
-                var(--background);
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
 
-            overflow-x: hidden;
-        }
+    overflow-x: hidden;
+}
 
-        body::before {
-            content: "";
+body::before {
+    content: "";
 
-            position: fixed;
-            inset: 0;
+    position: fixed;
+    inset: 0;
 
-            pointer-events: none;
+    pointer-events: none;
 
-            opacity: 0.16;
+    opacity: .16;
 
-            background-image:
-                linear-gradient(
-                    rgba(255,255,255,0.025) 1px,
-                    transparent 1px
-                ),
-                linear-gradient(
-                    90deg,
-                    rgba(255,255,255,0.025) 1px,
-                    transparent 1px
-                );
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        );
 
-            background-size: 45px 45px;
+    background-size: 50px 50px;
 
-            mask-image:
-                linear-gradient(
-                    to bottom,
-                    black,
-                    transparent 85%
-                );
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 85%
+        );
 
-            z-index: -5;
-        }
+    z-index: -5;
+}
 
-        ::selection {
-            background: rgba(124, 92, 255, 0.35);
-            color: white;
-        }
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+::selection {
+    background: rgba(128,92,255,.4);
+}
 
 
-        /* =========================================================
-           NAVIGATION
-           ========================================================= */
+/* =========================================================
+   NAVBAR
+   ========================================================= */
 
-        .navbar {
-            position: fixed;
+.navbar {
+    position: fixed;
 
-            top: 18px;
-            left: 50%;
+    top: 16px;
+    left: 50%;
 
-            transform: translateX(-50%);
+    transform: translateX(-50%);
 
-            width: min(1120px, calc(100% - 28px));
+    width: min(1150px, calc(100% - 30px));
 
-            padding: 12px 14px;
+    padding: 11px 13px;
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-            border: 1px solid var(--border);
-            border-radius: 17px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
 
-            background: rgba(7, 9, 13, 0.74);
+    background: rgba(6,7,10,.72);
 
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 
-            box-shadow:
-                0 15px 50px rgba(0,0,0,0.28);
+    z-index: 1000;
 
-            z-index: 1000;
-        }
+    transition: .3s;
+}
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+.navbar.scrolled {
+    box-shadow: 0 20px 60px rgba(0,0,0,.45);
+}
 
-            font-size: 15px;
-            font-weight: 800;
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
-            letter-spacing: -0.3px;
-        }
+    font-size: 15px;
+    font-weight: 800;
+}
 
-        .brand-logo {
-            width: 35px;
-            height: 35px;
+.logo-icon {
+    width: 36px;
+    height: 36px;
 
-            display: grid;
-            place-items: center;
+    display: grid;
+    place-items: center;
 
-            border-radius: 10px;
+    border-radius: 10px;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--purple),
-                    #5139d1
-                );
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            #5538d2
+        );
 
-            box-shadow:
-                0 0 30px var(--glow);
+    box-shadow:
+        0 0 30px rgba(128,92,255,.3);
 
-            font-weight: 900;
-        }
+    font-weight: 900;
+}
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
 
-        .nav-links a {
-            color: var(--text-secondary);
+.nav-links a {
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
 
-            font-size: 13px;
-            font-weight: 600;
+    transition: .2s;
+}
 
-            transition:
-                color 0.2s ease,
-                transform 0.2s ease;
-        }
+.nav-links a:hover {
+    color: white;
+}
 
-        .nav-links a:hover {
-            color: white;
-            transform: translateY(-1px);
-        }
+.nav-github {
+    padding: 9px 14px;
 
-        .github-button {
-            padding: 9px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
 
-            border: 1px solid var(--border);
-            border-radius: 10px;
+    color: white !important;
 
-            color: white !important;
+    background: rgba(255,255,255,.045);
+}
 
-            background:
-                rgba(255,255,255,0.045);
-        }
 
-        .github-button:hover {
-            background:
-                rgba(255,255,255,0.09);
-        }
+/* =========================================================
+   HERO
+   ========================================================= */
 
+.hero {
+    min-height: 100vh;
 
-        /* =========================================================
-           HERO
-           ========================================================= */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        .hero {
-            min-height: 100vh;
+    position: relative;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    padding: 150px 20px 100px;
 
-            position: relative;
+    text-align: center;
+}
 
-            padding:
-                140px
-                20px
-                90px;
+.hero-content {
+    max-width: 900px;
+    position: relative;
+    z-index: 2;
+}
 
-            text-align: center;
-        }
+.hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 
-        .hero-content {
-            max-width: 900px;
+    padding: 8px 13px;
 
-            position: relative;
-            z-index: 2;
-        }
+    border: 1px solid var(--border);
+    border-radius: 999px;
 
-        .status-badge {
-            display: inline-flex;
+    background: rgba(255,255,255,.035);
 
-            align-items: center;
-            gap: 8px;
+    color: #c8ced8;
 
-            padding: 8px 13px;
+    font-size: 12px;
 
-            border: 1px solid var(--border);
-            border-radius: 999px;
+    animation: appear .8s ease both;
+}
 
-            background:
-                rgba(255,255,255,0.035);
+.status {
+    width: 7px;
+    height: 7px;
 
-            color: #cbd3df;
+    border-radius: 50%;
 
-            font-size: 13px;
+    background: var(--green);
 
-            animation:
-                fadeUp 0.8s ease both;
-        }
+    box-shadow: 0 0 14px var(--green);
 
-        .status-dot {
-            width: 7px;
-            height: 7px;
+    animation: pulse 2s infinite;
+}
 
-            border-radius: 50%;
+.hero h1 {
+    margin-top: 25px;
 
-            background: var(--green);
+    font-size:
+        clamp(
+            60px,
+            11vw,
+            125px
+        );
 
-            box-shadow:
-                0 0 13px var(--green);
+    line-height: .86;
 
-            animation:
-                pulse 2s infinite;
-        }
+    letter-spacing: -7px;
 
-        .hero h1 {
-            margin-top: 25px;
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 20%,
+            #c4b8ff 55%,
+            #77e8c5 100%
+        );
 
-            font-size:
-                clamp(
-                    58px,
-                    10vw,
-                    112px
-                );
+    -webkit-background-clip: text;
+    background-clip: text;
 
-            line-height: 0.92;
+    color: transparent;
 
-            letter-spacing: -6px;
+    animation:
+        appear .9s .08s ease both;
+}
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #ffffff 15%,
-                    #c1b8ff 55%,
-                    #78e8c6 100%
-                );
+.hero-description {
+    max-width: 690px;
 
-            -webkit-background-clip: text;
-            background-clip: text;
+    margin:
+        28px auto 0;
 
-            color: transparent;
+    color: var(--text);
 
-            animation:
-                fadeUp 0.9s 0.08s ease both;
-        }
+    font-size:
+        clamp(
+            16px,
+            2vw,
+            20px
+        );
 
-        .hero-subtitle {
-            max-width: 690px;
+    line-height: 1.7;
 
-            margin:
-                25px auto 0;
+    animation:
+        appear .9s .16s ease both;
+}
 
-            color: var(--text-secondary);
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 
-            font-size:
-                clamp(
-                    16px,
-                    2.5vw,
-                    21px
-                );
+    gap: 12px;
 
-            line-height: 1.65;
+    margin-top: 35px;
 
-            animation:
-                fadeUp 0.9s 0.16s ease both;
-        }
+    animation:
+        appear .9s .24s ease both;
+}
 
-        .hero-buttons {
-            margin-top: 34px;
+.button {
+    display: inline-flex;
 
-            display: flex;
+    align-items: center;
+    justify-content: center;
 
-            align-items: center;
-            justify-content: center;
+    gap: 8px;
 
-            flex-wrap: wrap;
+    padding: 13px 19px;
 
-            gap: 12px;
+    border-radius: 12px;
 
-            animation:
-                fadeUp 0.9s 0.24s ease both;
-        }
+    border: 1px solid var(--border);
 
+    font-size: 14px;
+    font-weight: 750;
 
-        /* =========================================================
-           BUTTONS
-           ========================================================= */
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        background .25s;
+}
 
-        .button {
-            display: inline-flex;
+.button:hover {
+    transform: translateY(-3px);
+}
 
-            align-items: center;
-            justify-content: center;
+.button-primary {
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            #593cd8
+        );
 
-            gap: 8px;
+    box-shadow:
+        0 15px 40px rgba(128,92,255,.25);
+}
 
-            padding:
-                13px
-                20px;
+.button-primary:hover {
+    box-shadow:
+        0 20px 55px rgba(128,92,255,.4);
+}
 
-            border-radius: 12px;
+.button-secondary {
+    background:
+        rgba(255,255,255,.045);
+}
 
-            font-size: 14px;
-            font-weight: 750;
+.button-secondary:hover {
+    background:
+        rgba(255,255,255,.09);
+}
 
-            border: 1px solid var(--border);
 
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease,
-                background 0.25s ease;
-        }
+/* =========================================================
+   HERO ORBS
+   ========================================================= */
 
-        .button:hover {
-            transform: translateY(-3px);
-        }
+.orb {
+    position: absolute;
 
-        .button-primary {
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--purple),
-                    #5941dc
-                );
+    width: 500px;
+    height: 500px;
 
-            box-shadow:
-                0 12px 35px var(--glow);
-        }
+    border-radius: 50%;
 
-        .button-primary:hover {
-            box-shadow:
-                0 18px 50px var(--glow);
-        }
+    filter: blur(40px);
 
-        .button-secondary {
-            background:
-                rgba(255,255,255,0.045);
+    pointer-events: none;
 
-            color: #dbe1ea;
-        }
+    opacity: .6;
 
-        .button-secondary:hover {
-            background:
-                rgba(255,255,255,0.085);
-        }
+    animation: float 9s ease-in-out infinite;
+}
 
+.orb.one {
+    left: -280px;
+    top: 20%;
 
-        /* =========================================================
-           FLOATING ORBS
-           ========================================================= */
+    background:
+        radial-gradient(
+            circle,
+            rgba(128,92,255,.16),
+            transparent 65%
+        );
+}
 
-        .orb {
-            position: absolute;
+.orb.two {
+    right: -300px;
+    bottom: 5%;
 
-            width: 420px;
-            height: 420px;
+    background:
+        radial-gradient(
+            circle,
+            rgba(56,223,170,.09),
+            transparent 65%
+        );
 
-            border-radius: 50%;
+    animation-delay: -3s;
+}
 
-            pointer-events: none;
 
-            filter: blur(10px);
+/* =========================================================
+   CONTAINER
+   ========================================================= */
 
-            animation:
-                floating 8s ease-in-out infinite;
-        }
+.container {
+    width: min(
+        1120px,
+        calc(100% - 30px)
+    );
 
-        .orb-purple {
-            left: -190px;
-            top: 8%;
+    margin: auto;
+}
 
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(124,92,255,0.23),
-                    transparent 68%
-                );
-        }
+section {
+    padding: 110px 0;
+}
 
-        .orb-green {
-            right: -190px;
-            bottom: 2%;
+.section-title {
+    text-align: center;
 
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(53,214,164,0.14),
-                    transparent 68%
-                );
+    margin-bottom: 50px;
+}
 
-            animation-delay: -3s;
-        }
+.section-label {
+    color: var(--purple2);
 
+    font-size: 11px;
 
-        /* =========================================================
-           GENERAL SECTIONS
-           ========================================================= */
+    text-transform: uppercase;
 
-        .section {
-            width:
-                min(
-                    1120px,
-                    calc(100% - 30px)
-                );
+    letter-spacing: 2.5px;
 
-            margin: auto;
+    font-weight: 800;
+}
 
-            padding:
-                100px 0;
-        }
+.section-title h2 {
+    margin-top: 10px;
 
-        .section-header {
-            text-align: center;
+    font-size:
+        clamp(
+            34px,
+            5vw,
+            54px
+        );
 
-            margin-bottom: 42px;
-        }
+    letter-spacing: -3px;
+}
 
-        .eyebrow {
-            color: var(--purple-light);
+.section-title p {
+    max-width: 650px;
 
-            font-size: 12px;
+    margin:
+        15px auto 0;
 
-            text-transform: uppercase;
+    color: var(--text);
 
-            letter-spacing: 2px;
+    line-height: 1.7;
+}
 
-            font-weight: 800;
-        }
 
-        .section-header h2 {
-            margin-top: 10px;
+/* =========================================================
+   FEATURE GRID
+   ========================================================= */
 
-            font-size:
-                clamp(
-                    32px,
-                    5vw,
-                    49px
-                );
+.features {
+    display: grid;
 
-            letter-spacing: -2.5px;
-        }
+    grid-template-columns:
+        repeat(3, 1fr);
 
-        .section-header p {
-            max-width: 650px;
+    gap: 15px;
+}
 
-            margin:
-                14px auto 0;
+.feature {
+    min-height: 230px;
 
-            color: var(--text-secondary);
+    padding: 28px;
 
-            line-height: 1.65;
-        }
+    position: relative;
 
+    overflow: hidden;
 
-        /* =========================================================
-           FEATURE CARDS
-           ========================================================= */
+    border: 1px solid var(--border);
+    border-radius: 20px;
 
-        .feature-grid {
-            display: grid;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.015)
+        );
 
-            grid-template-columns:
-                repeat(3, 1fr);
+    transition:
+        transform .3s,
+        border-color .3s,
+        background .3s;
+}
 
-            gap: 15px;
-        }
+.feature::before {
+    content: "";
 
-        .feature-card {
-            position: relative;
+    position: absolute;
 
-            padding: 27px;
+    width: 180px;
+    height: 180px;
 
-            min-height: 190px;
+    right: -100px;
+    top: -100px;
 
-            overflow: hidden;
+    border-radius: 50%;
 
-            border:
-                1px solid var(--border);
+    background:
+        radial-gradient(
+            circle,
+            rgba(128,92,255,.18),
+            transparent 70%
+        );
 
-            border-radius:
-                var(--radius);
+    filter: blur(15px);
+}
 
-            background:
-                linear-gradient(
-                    180deg,
-                    rgba(255,255,255,0.045),
-                    rgba(255,255,255,0.018)
-                );
+.feature:hover {
+    transform: translateY(-7px);
 
-            transition:
-                transform 0.3s ease,
-                border-color 0.3s ease,
-                background 0.3s ease;
-        }
+    border-color:
+        var(--border-hover);
 
-        .feature-card::after {
-            content: "";
+    background:
+        linear-gradient(
+            145deg,
+            rgba(128,92,255,.08),
+            rgba(255,255,255,.02)
+        );
+}
 
-            position: absolute;
+.feature-number {
+    color: var(--muted);
 
-            width: 160px;
-            height: 160px;
+    font-family: monospace;
 
-            top: -90px;
-            right: -90px;
+    font-size: 12px;
 
-            border-radius: 50%;
+    margin-bottom: 28px;
+}
 
-            background:
-                var(--glow);
+.feature-icon {
+    font-size: 27px;
 
-            filter: blur(50px);
+    margin-bottom: 18px;
+}
 
-            opacity: 0.45;
-        }
+.feature h3 {
+    font-size: 19px;
 
-        .feature-card:hover {
-            transform: translateY(-7px);
+    margin-bottom: 9px;
+}
 
-            border-color:
-                var(--border-hover);
+.feature p {
+    color: var(--text);
 
-            background:
-                var(--card-hover);
-        }
+    font-size: 14px;
 
-        .feature-icon {
-            font-size: 26px;
+    line-height: 1.7;
+}
 
-            margin-bottom: 17px;
-        }
 
-        .feature-card h3 {
-            font-size: 18px;
+/* =========================================================
+   SHOWCASE
+   ========================================================= */
 
-            margin-bottom: 9px;
-        }
+.showcase {
+    display: grid;
 
-        .feature-card p {
-            color: var(--text-secondary);
+    grid-template-columns:
+        1.1fr .9fr;
 
-            font-size: 14px;
+    gap: 18px;
+}
 
-            line-height: 1.65;
-        }
+.showcase-main {
+    min-height: 420px;
 
+    padding: 35px;
 
-        /* =========================================================
-           SHOWCASE
-           ========================================================= */
+    position: relative;
 
-        .showcase {
-            display: grid;
+    overflow: hidden;
 
-            grid-template-columns:
-                1fr 1fr;
+    border:
+        1px solid var(--border);
 
-            gap: 18px;
+    border-radius: 24px;
 
-            align-items: stretch;
-        }
+    background:
+        linear-gradient(
+            145deg,
+            rgba(128,92,255,.12),
+            rgba(255,255,255,.02)
+        );
+}
 
-        .showcase-card {
-            min-height: 320px;
+.showcase-main h3 {
+    font-size: 30px;
 
-            padding: 32px;
+    letter-spacing: -1.5px;
 
-            border:
-                1px solid var(--border);
+    margin-bottom: 13px;
+}
 
-            border-radius:
-                var(--radius);
+.showcase-main p {
+    max-width: 500px;
 
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(124,92,255,0.10),
-                    rgba(255,255,255,0.025)
-                );
+    color: var(--text);
 
-            position: relative;
+    line-height: 1.7;
+}
 
-            overflow: hidden;
-        }
+.fake-launcher {
+    position: absolute;
 
-        .showcase-card::before {
-            content: "";
+    left: 35px;
+    right: 35px;
+    bottom: 28px;
 
-            position: absolute;
+    height: 190px;
 
-            width: 300px;
-            height: 300px;
+    padding: 18px;
 
-            right: -120px;
-            bottom: -150px;
+    border:
+        1px solid rgba(255,255,255,.1);
 
-            border-radius: 50%;
+    border-radius: 15px;
 
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(124,92,255,0.18),
-                    transparent 70%
-                );
-        }
+    background:
+        #090b10;
 
-        .showcase-card h3 {
-            font-size: 25px;
+    box-shadow:
+        0 30px 60px rgba(0,0,0,.4);
 
-            margin-bottom: 12px;
+    transform:
+        perspective(900px)
+        rotateX(4deg);
 
-            letter-spacing: -0.7px;
-        }
+    transition: transform .4s;
+}
 
-        .showcase-card p {
-            color: var(--text-secondary);
+.showcase-main:hover .fake-launcher {
+    transform:
+        perspective(900px)
+        rotateX(0deg)
+        translateY(-5px);
+}
 
-            line-height: 1.7;
+.launcher-top {
+    display: flex;
+    justify-content: space-between;
 
-            max-width: 470px;
-        }
+    color: #7f8998;
 
-        .code-window {
-            position: absolute;
+    font-size: 10px;
 
-            left: 32px;
-            right: 32px;
-            bottom: 28px;
+    padding-bottom: 13px;
 
-            padding: 15px 17px;
+    border-bottom:
+        1px solid var(--border);
+}
 
-            border:
-                1px solid var(--border);
+.launcher-content {
+    display: grid;
 
-            border-radius: 12px;
+    grid-template-columns:
+        90px 1fr;
 
-            background:
-                rgba(0,0,0,0.32);
+    height: 125px;
+}
 
-            color: #b8c1ce;
+.launcher-side {
+    padding-top: 15px;
 
-            font-family:
-                "SFMono-Regular",
-                Consolas,
-                monospace;
+    border-right:
+        1px solid var(--border);
 
-            font-size: 12px;
-        }
+    color: #687181;
 
-        .terminal-dot {
-            display: inline-block;
+    font-size: 10px;
 
-            width: 7px;
-            height: 7px;
+    line-height: 2;
+}
 
-            border-radius: 50%;
+.launcher-main {
+    padding: 20px;
+}
 
-            background: var(--green);
+.launcher-main-title {
+    font-size: 17px;
+    font-weight: 800;
+}
 
-            margin-right: 8px;
-        }
+.launcher-bar {
+    height: 7px;
 
+    margin-top: 15px;
 
-        /* =========================================================
-           DOWNLOAD
-           ========================================================= */
+    width: 65%;
 
-        .download-section {
-            padding-bottom: 110px;
-        }
+    border-radius: 99px;
 
-        .download-box {
-            position: relative;
+    background:
+        linear-gradient(
+            90deg,
+            var(--purple),
+            var(--green)
+        );
+}
 
-            padding:
-                55px 30px;
+.showcase-side {
+    display: grid;
 
-            text-align: center;
+    gap: 18px;
+}
 
-            overflow: hidden;
+.info-card {
+    padding: 30px;
 
-            border:
-                1px solid
-                rgba(124,92,255,0.35);
+    border:
+        1px solid var(--border);
 
-            border-radius: 27px;
+    border-radius: 22px;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(124,92,255,0.14),
-                    rgba(53,214,164,0.045)
-                );
-        }
+    background:
+        rgba(255,255,255,.025);
+}
 
-        .download-box::before {
-            content: "";
+.info-card h3 {
+    font-size: 20px;
 
-            position: absolute;
+    margin-bottom: 10px;
+}
 
-            width: 400px;
-            height: 400px;
+.info-card p {
+    color: var(--text);
 
-            left: 50%;
-            top: 50%;
+    line-height: 1.7;
 
-            transform:
-                translate(-50%, -50%);
+    font-size: 14px;
+}
 
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(124,92,255,0.14),
-                    transparent 70%
-                );
 
-            pointer-events: none;
-        }
+/* =========================================================
+   WORKFLOW
+   ========================================================= */
 
-        .download-box > * {
-            position: relative;
-            z-index: 1;
-        }
+.workflow {
+    display: grid;
 
-        .download-box h2 {
-            margin:
-                10px 0 14px;
+    grid-template-columns:
+        repeat(4, 1fr);
 
-            font-size:
-                clamp(
-                    35px,
-                    5vw,
-                    52px
-                );
+    gap: 12px;
+}
 
-            letter-spacing: -2px;
-        }
+.step {
+    padding: 25px;
 
-        .download-box p {
-            max-width: 610px;
+    border:
+        1px solid var(--border);
 
-            margin:
-                0 auto 27px;
+    border-radius: 18px;
 
-            color: var(--text-secondary);
+    background:
+        rgba(255,255,255,.025);
+}
 
-            line-height: 1.65;
-        }
+.step-number {
+    width: 34px;
+    height: 34px;
 
-        .platform-info {
-            margin-top: 18px;
+    display: grid;
+    place-items: center;
 
-            color: var(--text-dark);
+    margin-bottom: 20px;
 
-            font-size: 12px;
-        }
+    border-radius: 10px;
 
+    background:
+        rgba(128,92,255,.13);
 
-        /* =========================================================
-           FOOTER
-           ========================================================= */
+    color:
+        var(--purple2);
 
-        footer {
-            width:
-                min(
-                    1120px,
-                    calc(100% - 30px)
-                );
+    font-size: 12px;
+    font-weight: 800;
+}
 
-            margin: auto;
+.step h3 {
+    margin-bottom: 8px;
 
-            padding:
-                35px 0 45px;
+    font-size: 16px;
+}
 
-            border-top:
-                1px solid var(--border);
+.step p {
+    color: var(--text);
 
-            display: flex;
+    font-size: 13px;
 
-            justify-content: space-between;
+    line-height: 1.6;
+}
 
-            gap: 20px;
 
-            color: var(--text-dark);
+/* =========================================================
+   COMMUNITY
+   ========================================================= */
 
-            font-size: 13px;
-        }
+.community {
+    padding: 55px 35px;
 
-        .footer-links {
-            display: flex;
+    text-align: center;
 
-            gap: 15px;
-        }
+    border:
+        1px solid var(--border);
 
-        .footer-links a {
-            transition: color 0.2s ease;
-        }
+    border-radius: 25px;
 
-        .footer-links a:hover {
-            color: white;
-        }
+    background:
+        linear-gradient(
+            135deg,
+            rgba(128,92,255,.09),
+            rgba(56,223,170,.035)
+        );
+}
 
+.community h2 {
+    font-size:
+        clamp(
+            32px,
+            5vw,
+            50px
+        );
 
-        /* =========================================================
-           SCROLL REVEAL
-           ========================================================= */
+    letter-spacing: -2.5px;
+}
 
-        .reveal {
-            opacity: 0;
+.community p {
+    max-width: 620px;
 
-            transform:
-                translateY(30px);
+    margin:
+        14px auto 25px;
 
-            transition:
-                opacity 0.8s ease,
-                transform 0.8s ease;
-        }
+    color: var(--text);
 
-        .reveal.visible {
-            opacity: 1;
+    line-height: 1.7;
+}
 
-            transform:
-                translateY(0);
-        }
 
+/* =========================================================
+   DOWNLOAD
+   ========================================================= */
 
-        /* =========================================================
-           ANIMATIONS
-           ========================================================= */
+.download {
+    text-align: center;
 
-        @keyframes fadeUp {
+    padding-bottom: 120px;
+}
 
-            from {
-                opacity: 0;
-                transform:
-                    translateY(22px);
-            }
+.download-box {
+    padding:
+        70px 25px;
 
-            to {
-                opacity: 1;
-                transform:
-                    translateY(0);
-            }
-        }
+    position: relative;
 
-        @keyframes floating {
+    overflow: hidden;
 
-            0%,
-            100% {
-                transform:
-                    translateY(0)
-                    scale(1);
-            }
+    border:
+        1px solid rgba(128,92,255,.3);
 
-            50% {
-                transform:
-                    translateY(-25px)
-                    scale(1.05);
-            }
-        }
+    border-radius: 28px;
 
-        @keyframes pulse {
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(128,92,255,.18),
+            transparent 50%
+        ),
+        #0b0d13;
+}
 
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+.download-box h2 {
+    margin-top: 10px;
 
-            50% {
-                opacity: 0.55;
-                transform: scale(0.8);
-            }
-        }
+    font-size:
+        clamp(
+            38px,
+            6vw,
+            65px
+        );
 
+    letter-spacing: -3px;
+}
 
-        /* =========================================================
-           RESPONSIVE
-           ========================================================= */
+.download-box p {
+    max-width: 610px;
 
-        @media (max-width: 850px) {
+    margin:
+        15px auto 28px;
 
-            .feature-grid {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
+    color: var(--text);
 
-            .showcase {
-                grid-template-columns: 1fr;
-            }
-        }
+    line-height: 1.7;
+}
 
+.requirements {
+    margin-top: 18px;
 
-        @media (max-width: 650px) {
+    color: var(--muted);
 
-            .navbar {
-                top: 10px;
-            }
+    font-size: 11px;
+}
 
-            .nav-links {
-                gap: 8px;
-            }
 
-            .nav-links a:not(.github-button) {
-                display: none;
-            }
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
-            .hero {
-                padding-top: 130px;
-            }
+footer {
+    border-top:
+        1px solid var(--border);
 
-            .hero h1 {
-                letter-spacing: -4px;
-            }
+    padding:
+        35px 0 45px;
 
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
+    color: var(--muted);
 
-            .section {
-                padding:
-                    75px 0;
-            }
+    font-size: 12px;
+}
 
-            footer {
-                flex-direction: column;
+.footer-inner {
+    display: flex;
 
-                align-items: center;
+    justify-content: space-between;
 
-                text-align: center;
-            }
-        }
+    gap: 20px;
+}
 
+.footer-links {
+    display: flex;
 
-        /* =========================================================
-           REDUCED MOTION
-           ========================================================= */
+    gap: 18px;
+}
 
-        @media (prefers-reduced-motion: reduce) {
+.footer-links a:hover {
+    color: white;
+}
 
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                scroll-behavior: auto !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
 
-    </style>
+/* =========================================================
+   SCROLL ANIMATION
+   ========================================================= */
+
+.reveal {
+    opacity: 0;
+
+    transform:
+        translateY(30px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes appear {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-25px);
+    }
+}
+
+@keyframes pulse {
+
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: .5;
+        transform: scale(.8);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .features {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .showcase {
+        grid-template-columns: 1fr;
+    }
+
+    .workflow {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+
+    .navbar {
+        top: 10px;
+    }
+
+    .nav-links {
+        gap: 8px;
+    }
+
+    .nav-links a:not(.nav-github) {
+        display: none;
+    }
+
+    .hero {
+        padding-top: 130px;
+    }
+
+    .hero h1 {
+        letter-spacing: -4px;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .workflow {
+        grid-template-columns: 1fr;
+    }
+
+    .showcase-main {
+        min-height: 450px;
+    }
+
+    .fake-launcher {
+        left: 20px;
+        right: 20px;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+
+        align-items: center;
+
+        text-align: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+</style>
 </head>
 
 
 <body>
 
 
-    <!-- =========================================================
-         NAVIGATION
-         ========================================================= -->
+<!-- =========================================================
+     NAVIGATION
+     ========================================================= -->
 
-    <nav class="navbar">
+<nav class="navbar" id="navbar">
 
-        <a
-            class="brand"
-            href="#top"
-            aria-label="BitLauncher Home"
-        >
+    <a href="#home" class="logo">
 
-            <span class="brand-logo">
-                B
-            </span>
-
-            BitLauncher
-
-        </a>
-
-
-        <div class="nav-links">
-
-            <a href="#features">
-                Features
-            </a>
-
-            <a href="#about">
-                About
-            </a>
-
-            <a href="#download">
-                Download
-            </a>
-
-            <a
-                href="https://github.com/slipptech-tech/BitLauncher/wiki"
-            >
-                Wiki
-            </a>
-
-            <a
-                class="github-button"
-                href="https://github.com/slipptech-tech/BitLauncher"
-                target="_blank"
-                rel="noopener"
-            >
-                GitHub ↗
-            </a>
-
-        </div>
-
-    </nav>
-
-
-
-    <!-- =========================================================
-         HERO
-         ========================================================= -->
-
-    <main id="top">
-
-        <section class="hero">
-
-            <div class="orb orb-purple"></div>
-
-            <div class="orb orb-green"></div>
-
-
-            <div class="hero-content">
-
-                <div class="status-badge">
-
-                    <span class="status-dot"></span>
-
-                    Open-source Minecraft launcher
-
-                </div>
-
-
-                <h1>
-                    BitLauncher
-                </h1>
-
-
-                <p class="hero-subtitle">
-
-                    A modern, lightweight Minecraft Fabric launcher
-                    built with Python. Simple to use, easy to configure,
-                    and completely open source.
-
-                </p>
-
-
-                <div class="hero-buttons">
-
-                    <a
-                        class="button button-primary"
-                        href="https://github.com/slipptech-tech/BitLauncher/releases/latest"
-                    >
-                        ↓ Download Latest Release
-                    </a>
-
-
-                    <a
-                        class="button button-secondary"
-                        href="https://github.com/slipptech-tech/BitLauncher/wiki"
-                    >
-                        📖 Read the Wiki
-                    </a>
-
-
-                    <a
-                        class="button button-secondary"
-                        href="https://github.com/slipptech-tech/BitLauncher"
-                        target="_blank"
-                        rel="noopener"
-                    >
-                        ◇ View Source
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             FEATURES
-             ===================================================== -->
-
-        <section
-            class="section reveal"
-            id="features"
-        >
-
-            <div class="section-header">
-
-                <div class="eyebrow">
-                    Why BitLauncher?
-                </div>
-
-                <h2>
-                    Everything you need.
-                    Nothing you don't.
-                </h2>
-
-                <p>
-                    Built for Minecraft players who want a clean,
-                    simple and powerful launcher experience.
-                </p>
-
-            </div>
-
-
-            <div class="feature-grid">
-
-
-                <article class="feature-card">
-
-                    <div class="feature-icon">
-                        ⚡
-                    </div>
-
-                    <h3>
-                        Lightweight
-                    </h3>
-
-                    <p>
-                        Designed to stay fast and responsive
-                        without unnecessary complexity.
-                    </p>
-
-                </article>
-
-
-
-                <article class="feature-card">
-
-                    <div class="feature-icon">
-                        🧩
-                    </div>
-
-                    <h3>
-                        Fabric Ready
-                    </h3>
-
-                    <p>
-                        Manage Minecraft Fabric versions
-                        and launch your favorite modded setups.
-                    </p>
-
-                </article>
-
-
-
-                <article class="feature-card">
-
-                    <div class="feature-icon">
-                        ⚙️
-                    </div>
-
-                    <h3>
-                        Configurable
-                    </h3>
-
-                    <p>
-                        Configure RAM, Java, JVM arguments
-                        and other launcher settings.
-                    </p>
-
-                </article>
-
-
-
-                <article class="feature-card">
-
-                    <div class="feature-icon">
-                        🔓
-                    </div>
-
-                    <h3>
-                        Open Source
-                    </h3>
-
-                    <p>
-                        Inspect the source code, report issues,
-                        suggest improvements and contribute.
-                    </p>
-
-                </article>
-
-
-
-                <article class="feature-card">
-
-                    <div class="feature-icon">
-                        🖥️
-                    </div>
-
-                    <h3>
-                        Desktop Focused
-                    </h3>
-
-                    <p>
-                        Made for Minecraft Java Edition
-                        desktop workflows.
-                    </p>
-
-                </article>
-
-
-
-                <article class="feature-card">
-
-                    <div class="feature-icon">
-                        🚀
-                    </div>
-
-                    <h3>
-                        Always Improving
-                    </h3>
-
-                    <p>
-                        New features, fixes and improvements
-                        are added as the project evolves.
-                    </p>
-
-                </article>
-
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             ABOUT / SHOWCASE
-             ===================================================== -->
-
-        <section
-            class="section reveal"
-            id="about"
-        >
-
-            <div class="section-header">
-
-                <div class="eyebrow">
-                    Built for the community
-                </div>
-
-                <h2>
-                    Open. Simple. Yours.
-                </h2>
-
-                <p>
-                    BitLauncher is designed to give players
-                    a straightforward way to manage and launch
-                    Minecraft Fabric installations.
-                </p>
-
-            </div>
-
-
-            <div class="showcase">
-
-
-                <div class="showcase-card">
-
-                    <h3>
-                        Made with Python
-                    </h3>
-
-                    <p>
-                        BitLauncher is built with Python and uses
-                        an open-source development model. Anyone
-                        can inspect the project and help improve it.
-                    </p>
-
-
-                    <div class="code-window">
-
-                        <span class="terminal-dot"></span>
-
-                        BitLauncher /
-                        open-source /
-                        Python
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="showcase-card">
-
-                    <h3>
-                        Your Minecraft. Your setup.
-                    </h3>
-
-                    <p>
-                        Configure your Java runtime, memory,
-                        JVM options and Minecraft versions from
-                        one launcher.
-                    </p>
-
-
-                    <div class="code-window">
-
-                        <span class="terminal-dot"></span>
-
-                        Java · RAM · Fabric · JVM
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             DOWNLOAD
-             ===================================================== -->
-
-        <section
-            class="section download-section reveal"
-            id="download"
-        >
-
-            <div class="download-box">
-
-                <div class="eyebrow">
-                    Get BitLauncher
-                </div>
-
-
-                <h2>
-                    Ready to launch?
-                </h2>
-
-
-                <p>
-                    Download the latest BitLauncher release
-                    from GitHub or read the documentation to
-                    get started.
-                </p>
-
-
-                <div class="hero-buttons">
-
-                    <a
-                        class="button button-primary"
-                        href="https://github.com/slipptech-tech/BitLauncher/releases/latest"
-                    >
-                        ↓ Download Latest Release
-                    </a>
-
-
-                    <a
-                        class="button button-secondary"
-                        href="https://github.com/slipptech-tech/BitLauncher/wiki/Installation"
-                    >
-                        Installation Guide
-                    </a>
-
-                </div>
-
-
-                <div class="platform-info">
-
-                    Check the release page for currently
-                    supported builds and requirements.
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-
-    <!-- =========================================================
-         FOOTER
-         ========================================================= -->
-
-    <footer>
-
-        <span>
-            © 2026 BitLauncher.
-            Open-source software.
+        <span class="logo-icon">
+            B
         </span>
 
+        BitLauncher
 
-        <div class="footer-links">
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="#features">
+            Features
+        </a>
+
+        <a href="#showcase">
+            Launcher
+        </a>
+
+        <a href="#community">
+            Community
+        </a>
+
+        <a href="https://github.com/slipptech-tech/BitLauncher/wiki">
+            Wiki
+        </a>
+
+        <a
+            href="https://github.com/slipptech-tech/BitLauncher"
+            target="_blank"
+            rel="noopener"
+            class="nav-github"
+        >
+            GitHub ↗
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
+<section class="hero" id="home">
+
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+
+
+    <div class="hero-content">
+
+        <div class="hero-label">
+
+            <span class="status"></span>
+
+            Open-source Minecraft launcher
+
+        </div>
+
+
+        <h1>
+            BitLauncher
+        </h1>
+
+
+        <p class="hero-description">
+
+            A modern Minecraft Fabric launcher built for
+            simplicity, performance and freedom.
+
+            Manage your Minecraft setup without unnecessary
+            complexity.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                href="https://github.com/slipptech-tech/BitLauncher/releases/latest"
+                class="button button-primary"
+            >
+                ↓ Download BitLauncher
+            </a>
+
+
+            <a
+                href="https://github.com/slipptech-tech/BitLauncher/wiki"
+                class="button button-secondary"
+            >
+                Explore the Wiki
+            </a>
+
 
             <a
                 href="https://github.com/slipptech-tech/BitLauncher"
                 target="_blank"
                 rel="noopener"
+                class="button button-secondary"
             >
-                GitHub
-            </a>
-
-            <a
-                href="https://github.com/slipptech-tech/BitLauncher/wiki"
-            >
-                Wiki
-            </a>
-
-            <a
-                href="https://github.com/slipptech-tech/BitLauncher/releases"
-            >
-                Releases
+                View on GitHub ↗
             </a>
 
         </div>
 
-    </footer>
+    </div>
+
+</section>
 
 
 
-    <!-- =========================================================
-         JAVASCRIPT
-         ========================================================= -->
+<!-- =========================================================
+     FEATURES
+     ========================================================= -->
 
-    <script>
+<section class="reveal" id="features">
 
-        /*
-         * Scroll reveal animation
-         */
+    <div class="container">
 
-        const revealElements =
-            document.querySelectorAll(".reveal");
+        <div class="section-title">
+
+            <div class="section-label">
+                Features
+            </div>
+
+            <h2>
+                Built around your Minecraft.
+            </h2>
+
+            <p>
+                Everything BitLauncher needs to give you
+                a clean and flexible Minecraft experience.
+            </p>
+
+        </div>
 
 
-        const revealObserver =
-            new IntersectionObserver(
+        <div class="features">
 
-                (entries) => {
 
-                    entries.forEach((entry) => {
+            <article class="feature">
 
-                        if (entry.isIntersecting) {
+                <div class="feature-number">
+                    01 / PERFORMANCE
+                </div>
 
-                            entry.target.classList.add(
-                                "visible"
-                            );
+                <div class="feature-icon">
+                    ⚡
+                </div>
 
-                            revealObserver.unobserve(
-                                entry.target
-                            );
+                <h3>
+                    Lightweight
+                </h3>
 
-                        }
+                <p>
+                    A focused launcher experience without
+                    unnecessary features getting in your way.
+                </p>
 
-                    });
+            </article>
 
-                },
 
-                {
-                    threshold: 0.12
+
+            <article class="feature">
+
+                <div class="feature-number">
+                    02 / MODDING
+                </div>
+
+                <div class="feature-icon">
+                    🧩
+                </div>
+
+                <h3>
+                    Fabric Support
+                </h3>
+
+                <p>
+                    Designed around Minecraft Fabric and
+                    modded Minecraft workflows.
+                </p>
+
+            </article>
+
+
+
+            <article class="feature">
+
+                <div class="feature-number">
+                    03 / CONTROL
+                </div>
+
+                <div class="feature-icon">
+                    ⚙️
+                </div>
+
+                <h3>
+                    Full Configuration
+                </h3>
+
+                <p>
+                    Configure Java, RAM, JVM arguments,
+                    Minecraft versions and launcher settings.
+                </p>
+
+            </article>
+
+
+
+            <article class="feature">
+
+                <div class="feature-number">
+                    04 / OPEN SOURCE
+                </div>
+
+                <div class="feature-icon">
+                    🔓
+                </div>
+
+                <h3>
+                    Open Source
+                </h3>
+
+                <p>
+                    The project is public on GitHub.
+                    Inspect the source and contribute.
+                </p>
+
+            </article>
+
+
+
+            <article class="feature">
+
+                <div class="feature-number">
+                    05 / VERSIONS
+                </div>
+
+                <div class="feature-icon">
+                    📦
+                </div>
+
+                <h3>
+                    Version Management
+                </h3>
+
+                <p>
+                    Keep your Minecraft versions organized
+                    and ready to launch.
+                </p>
+
+            </article>
+
+
+
+            <article class="feature">
+
+                <div class="feature-number">
+                    06 / COMMUNITY
+                </div>
+
+                <div class="feature-icon">
+                    🚀
+                </div>
+
+                <h3>
+                    Growing Project
+                </h3>
+
+                <p>
+                    BitLauncher is evolving with new ideas,
+                    improvements and community feedback.
+                </p>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     SHOWCASE
+     ========================================================= -->
+
+<section class="reveal" id="showcase">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <div class="section-label">
+                The Launcher
+            </div>
+
+            <h2>
+                Simple on the surface.
+                Powerful underneath.
+            </h2>
+
+            <p>
+                A launcher designed to keep the important
+                controls close without overwhelming you.
+            </p>
+
+        </div>
+
+
+        <div class="showcase">
+
+
+            <div class="showcase-main">
+
+                <h3>
+                    Your Minecraft setup,
+                    your way.
+                </h3>
+
+                <p>
+                    Configure your environment, choose a
+                    Minecraft version and launch your game
+                    from one focused interface.
+                </p>
+
+
+                <div class="fake-launcher">
+
+                    <div class="launcher-top">
+
+                        <span>
+                            BITLAUNCHER
+                        </span>
+
+                        <span>
+                            SETTINGS
+                        </span>
+
+                    </div>
+
+
+                    <div class="launcher-content">
+
+                        <div class="launcher-side">
+
+                            INSTANCES<br>
+                            VERSIONS<br>
+                            FABRIC<br>
+                            SETTINGS
+
+                        </div>
+
+
+                        <div class="launcher-main">
+
+                            <div class="launcher-main-title">
+                                Minecraft
+                            </div>
+
+                            <div
+                                style="
+                                    color:#687180;
+                                    font-size:10px;
+                                    margin-top:5px;
+                                "
+                            >
+                                Fabric • Ready to launch
+                            </div>
+
+                            <div class="launcher-bar"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="showcase-side">
+
+
+                <div class="info-card">
+
+                    <h3>
+                        ⚙ Configuration
+                    </h3>
+
+                    <p>
+                        Adjust memory allocation, Java settings,
+                        JVM arguments and other options to fit
+                        your setup.
+                    </p>
+
+                </div>
+
+
+
+                <div class="info-card">
+
+                    <h3>
+                        🧩 Fabric First
+                    </h3>
+
+                    <p>
+                        Built with Fabric-based Minecraft
+                        setups in mind, making modded gameplay
+                        easier to manage.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     HOW IT WORKS
+     ========================================================= -->
+
+<section class="reveal">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <div class="section-label">
+                Getting Started
+            </div>
+
+            <h2>
+                From download to Minecraft.
+            </h2>
+
+            <p>
+                Getting started with BitLauncher is designed
+                to be straightforward.
+            </p>
+
+        </div>
+
+
+        <div class="workflow">
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <h3>
+                    Download
+                </h3>
+
+                <p>
+                    Get the latest release from GitHub.
+                </p>
+
+            </div>
+
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    02
+                </div>
+
+                <h3>
+                    Configure
+                </h3>
+
+                <p>
+                    Set Java, RAM and other launcher options.
+                </p>
+
+            </div>
+
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    03
+                </div>
+
+                <h3>
+                    Choose
+                </h3>
+
+                <p>
+                    Select your Minecraft and Fabric setup.
+                </p>
+
+            </div>
+
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    04
+                </div>
+
+                <h3>
+                    Launch
+                </h3>
+
+                <p>
+                    Start Minecraft and get playing.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     COMMUNITY
+     ========================================================= -->
+
+<section
+    class="reveal"
+    id="community"
+>
+
+    <div class="container">
+
+        <div class="community">
+
+            <div class="section-label">
+                Open Source
+            </div>
+
+            <h2>
+                Help build BitLauncher.
+            </h2>
+
+            <p>
+                Found a bug? Have an idea? Want to improve
+                something? The project lives on GitHub and
+                the documentation lives in the Wiki.
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="https://github.com/slipptech-tech/BitLauncher"
+                    target="_blank"
+                    rel="noopener"
+                    class="button button-primary"
+                >
+                    GitHub Repository ↗
+                </a>
+
+
+                <a
+                    href="https://github.com/slipptech-tech/BitLauncher/wiki"
+                    class="button button-secondary"
+                >
+                    Read Documentation
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     DOWNLOAD
+     ========================================================= -->
+
+<section class="download reveal">
+
+    <div class="container">
+
+        <div class="download-box">
+
+            <div class="section-label">
+                Download
+            </div>
+
+            <h2>
+                Ready to launch?
+            </h2>
+
+            <p>
+                Get the latest BitLauncher release and
+                start building your Minecraft setup.
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="https://github.com/slipptech-tech/BitLauncher/releases/latest"
+                    class="button button-primary"
+                >
+                    ↓ Download Latest Release
+                </a>
+
+
+                <a
+                    href="https://github.com/slipptech-tech/BitLauncher/wiki/Installation"
+                    class="button button-secondary"
+                >
+                    Installation Guide
+                </a>
+
+            </div>
+
+
+            <div class="requirements">
+
+                Check the release page for supported platforms
+                and current system requirements.
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-inner">
+
+            <span>
+                © 2026 BitLauncher.
+                Open-source Minecraft launcher.
+            </span>
+
+
+            <div class="footer-links">
+
+                <a
+                    href="https://github.com/slipptech-tech/BitLauncher"
+                >
+                    GitHub
+                </a>
+
+                <a
+                    href="https://github.com/slipptech-tech/BitLauncher/wiki"
+                >
+                    Wiki
+                </a>
+
+                <a
+                    href="https://github.com/slipptech-tech/BitLauncher/releases"
+                >
+                    Releases
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+/* =========================================================
+   NAVBAR SCROLL EFFECT
+   ========================================================= */
+
+const navbar =
+    document.getElementById("navbar");
+
+window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 30) {
+
+        navbar.classList.add("scrolled");
+
+    } else {
+
+        navbar.classList.remove("scrolled");
+
+    }
+
+});
+
+
+/* =========================================================
+   SCROLL REVEAL
+   ========================================================= */
+
+const elements =
+    document.querySelectorAll(".reveal");
+
+
+const observer =
+    new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add(
+                        "visible"
+                    );
+
+                    observer.unobserve(
+                        entry.target
+                    );
+
                 }
 
-            );
+            });
+
+        },
+
+        {
+            threshold: 0.12
+        }
+
+    );
 
 
-        revealElements.forEach((element) => {
+elements.forEach(element => {
 
-            revealObserver.observe(element);
+    observer.observe(element);
 
-        });
+});
 
-
-
-        /*
-         * Add a small shadow to the navbar
-         * when the user scrolls.
-         */
-
-        const navbar =
-            document.querySelector(".navbar");
-
-
-        window.addEventListener(
-            "scroll",
-            () => {
-
-                if (window.scrollY > 30) {
-
-                    navbar.style.boxShadow =
-                        "0 15px 55px rgba(0,0,0,0.42)";
-
-                } else {
-
-                    navbar.style.boxShadow =
-                        "0 15px 50px rgba(0,0,0,0.28)";
-
-                }
-
-            }
-        );
-
-    </script>
-
+</script>
 
 </body>
 </html>
