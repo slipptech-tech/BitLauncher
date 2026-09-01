@@ -1,1 +1,3 @@
-
+requests
+psutil
+minecraft-launcher-lib
