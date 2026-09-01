@@ -1,12 +1,29 @@
 <p align="center">
   <img width="584" height="78" alt="BitLauncher" src="https://github.com/user-attachments/assets/09fbdaf0-084f-4474-93f1-5d940ffff11b" />
-</p>
+</p> 
 
 Minecraft Fabric Python Open-Source Launcher
 
 Minecraft Fabric Python Open-Source Launcher is a lightweight, modern, and fully open-source launcher for Minecraft Java Edition, built with Python and designed with Fabric in mind.
 
 The project focuses on simplicity, performance, customization, and giving users full control over their Minecraft installations.
+
+<table>
+  <tr>
+    <td width="120" align="center" valign="middle">
+      <img width="80" src="https://github.com/user-attachments/assets/fc98e986-d7c5-4ca9-b5f6-54f7129cad88" alt="Steve" />
+    </td>
+    <td align="center" valign="middle">
+      <h2>BitLauncher</h2>
+      <p>Simple Minecraft Fabric Launcher</p>
+    </td>
+    <td width="180" align="center" valign="middle">
+      <a href="https://github.com/slipptech-tech/BitLauncher/releases">
+        <img src="https://img.shields.io/badge/Download-Release-brightgreen?style=for-the-badge" alt="Download Release">
+      </a>
+    </td>
+  </tr>
+</table>
 
 ✨ Features
 
