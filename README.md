@@ -1,4 +1,6 @@
-<img width="594" height="98" alt="image" src="https://github.com/user-attachments/assets/68daffff-e19d-4792-932f-ca0283923a0c" />
+<p align="center">
+  <img width="584" height="78" alt="BitLauncher" src="https://github.com/user-attachments/assets/09fbdaf0-084f-4474-93f1-5d940ffff11b" />
+</p>
 
 Minecraft Fabric Python Open-Source Launcher
 
