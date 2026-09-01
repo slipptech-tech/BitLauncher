@@ -6,26 +6,28 @@ Minecraft Fabric Python Open-Source Launcher is a lightweight, modern, and fully
 The project focuses on simplicity, performance, customization, and giving users full control over their Minecraft installations.
 
 ✨ Features
-🎮 Launch Minecraft Java Edition
-🧩 Full Fabric support
-📦 Mod installation and management
-🗂️ Multiple Minecraft instances
-☕ Java version selection and management
-⚙️ RAM and JVM argument configuration
-🎨 Clean and modern user interface
-📁 Minecraft directory and configuration management
-🔄 Minecraft version management
-🧵 Fabric Loader management
-📝 Built-in game log viewer
-🚀 Fast and lightweight startup
-🔓 Fully open-source codebase
-🛠️ Built With
+
+ Launch Minecraft Java Edition,
+ Full Fabric support,
+ Mod installation and management,
+ Multiple Minecraft instances,
+ Java version selection and management,
+ RAM and JVM argument configuration,
+ Clean and modern user interface,
+ Minecraft directory and configuration management,
+ Minecraft version management,
+ Fabric Loader management,
+ Built-in game log viewer,
+ Fast and lightweight startup,
+ Fully open-source codebase.
+
+🛠️Built With
 Python
 Fabric
 Minecraft Java Edition
-Tkinter / CustomTkinter
 Java / JVM
 Git & GitHub
+
 🎯 Project Goals
 
 The goal of this project is to create a simple, reliable, and customizable Minecraft launcher that anyone can use, inspect, modify, and improve.
